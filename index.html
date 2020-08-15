@@ -5,52 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>weather app</title>
     <link rel="stylesheet" href="style.css">
-    <style> 
-        #loader { 
-            border: 12px solid #f3f3f3; 
-            border-radius: 50%; 
-            border-top: 12px solid #444444; 
-            width: 70px; 
-            height: 70px; 
-            animation: spin 1s linear infinite; 
-        } 
-          
-        @keyframes spin { 
-            100% { 
-                transform: rotate(360deg); 
-            } 
-        } 
-          
-        .center { 
-            position: absolute; 
-            top: 0; 
-            bottom: 0; 
-            left: 0; 
-            right: 0; 
-            margin: auto; 
-        } 
-    </style> 
+    <style>
+        #spinner:not([hidden]) {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#spinner::after {
+  content: "";
+  width: 80px;
+  height: 80px;
+  border: 2px solid #f3f3f3;
+  border-top: 3px solid #f25a41;
+  border-radius: 100%;
+  will-change: transform;
+  animation: spin 1s infinite linear
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+    </style>
 </head>
 <body>
+   <div>
     <h1 id="countryName">India</h1>
     <h2 ><span id="Temp">35</span> <span>*C</span> </h2>
     <p id="weather">Hot</p>
-    <div id="loader" class="center"></div> 
-    <script> 
-        document.onreadystatechange = function() { 
-            if (document.readyState !== "complete") { 
-                document.querySelector( 
-                  "body").style.visibility = "hidden"; 
-                document.querySelector( 
-                  "#loader").style.visibility = "visible"; 
-            } else { 
-                document.querySelector( 
-                  "#loader").style.display = "none"; 
-                document.querySelector( 
-                  "body").style.visibility = "visible"; 
-            } 
-        }; 
-    </script> 
+    <div hidden id="spinner"></div>
+</div>
     <script src="app.js"></script>
 </body>
 </html>
